@@ -1,0 +1,130 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Homework1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            User jame = new User("jame_watom", "jame@mail.com");
+            Tshirt order_1 = new Tshirt("L ", "Red ",  500.00f, " Superman");
+            Tshirt order_2 = new Tshirt("M ", "Black ",  750.00f, " Batman");
+            Tshirt order_3 = new Tshirt("S ", "Pink ", 625.00f, " Panter");
+            Address Jameaddress = new Address("131/75 Phutthamonthon", "Nakhon Pathom", "10180"); 
+
+            ShoppingCart JameOrder = new ShoppingCart();
+            JameOrder.addOrder(order_1);
+            JameOrder.addOrder(order_2);
+            JameOrder.addOrder(order_3);
+            JameOrder.addAddress(Jameaddress);
+
+            jame.Showuser(jame);
+            JameOrder.printAddress();
+            JameOrder.printOrder();
+            JameOrder.printcost();
+        }
+    }
+    class Tshirt
+    {
+        public string size;
+
+        public string color;
+
+        public float price;
+
+        public string image;
+
+        public Tshirt(string valuesize, string valueColor, float valueprice, string valueimage)
+        {
+            size = valuesize;
+            color = valueColor;
+            price = valueprice;
+            image = valueimage;
+        }        
+    }
+
+    class User
+    {
+        public string name;
+              
+        public string email;
+
+        
+
+        public User(string valuename, string valueemail)
+        {
+            name = valuename;
+            email = valueemail;            
+        }
+        public void Showuser(User Name)
+        {
+            Console.WriteLine(Name.name);
+            Console.WriteLine(Name.email);
+        }
+    }
+    class Address
+    {
+        public string street;
+
+        public string city;
+
+        public string zipCode;
+
+        public Address(string valuestreet, string valuecity, string valuezipcode)
+        {
+            street = valuestreet;
+            city = valuecity;
+            zipCode = valuecity;
+        }
+    }
+    class ShoppingCart
+    {
+        public float Totalcost;
+        public List<Tshirt> CartTShirt;
+        public List<Address> Locations;
+    
+        public ShoppingCart()
+        {
+            CartTShirt = new List<Tshirt>();
+            Locations = new List<Address>();
+        }
+        public void addOrder(Tshirt Order)
+        {
+            CartTShirt.Add(Order);
+        }
+        public void addAddress(Address UserHome)
+        {
+            Locations.Add(UserHome);
+        }
+        public void printOrder()
+        {
+            foreach (Tshirt Jamebuy in CartTShirt) 
+            {
+                Console.Write(Jamebuy.size);
+                Console.Write(Jamebuy.color);
+                Console.Write(Jamebuy.price);
+                Console.WriteLine(Jamebuy.image);
+            }
+        }
+        public void printAddress()
+        {
+            foreach (Address JameLocations in Locations)
+            {
+                Console.Write(JameLocations.street);
+                Console.Write(JameLocations.city);                
+                Console.WriteLine(JameLocations.zipCode);
+            }
+
+        }
+        public void printcost()
+        {
+            float Totalcost = 0.0f;
+            foreach(Tshirt ordercost in CartTShirt)
+            {
+                Totalcost += ordercost.price;
+            }
+            Console.WriteLine(Totalcost);
+        }          
+    }
+}
